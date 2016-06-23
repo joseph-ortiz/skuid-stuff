@@ -7,7 +7,7 @@ Note: this does not work in Service Console.
 
 ##Installation
 1. clone this repo
-2. In Chrome, type the following in the omnibox. 
+2. In Chrome, type the following in the omnibox.
 ```bash
 chrome://extensions
 ```
