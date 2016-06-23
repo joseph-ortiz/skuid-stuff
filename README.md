@@ -3,7 +3,7 @@ Chrome extension for Skuid model data
 
 ##About
 I built this tool because I constantly need to query model data during development.
-Note: this does not work in Service Console.
+Note: this does NOT  work in Service Console.
 
 ##Installation
 1. clone this repo
