@@ -4,36 +4,26 @@
 
 // The function below is executed in the context of the inspected page.
 var page_getProperties = function() {
-    var skuidApi  = window.skuid;
+    console.log("Entered skuid dev tools");
+
     var models = skuid.model.getModelsList();
-    var modelNames = models.map(function(m) { return Object.getOwnPropertyNames(m.dataMap)[0];
-    var key = Object.getOwnPropertyNames(skuid.model.getModelsList()[0].dataMap)[0]; //HARD coded value.
-    var data  = skuid.model.getModelsList()[0].dataMap[key];
-    var props = Object.getOwnPropertyNames(skuid.model.getModelsList()[0].dataMap[Object.getOwnPropertyNames(skuid.model.getModelsList()[0].dataMap)[0]])
-        i//var data = window.jQuery && $0 ? jQuery.data($0) : {};
-
-    // Make a shallow copy with a null prototype, so that sidebar does not
-    // expose prototype.
-    var copy = { __proto__: null };
-    for (var i = 0; i < props.length; ++i)
-        copy[props[i]] = data[props[i]];
-
-   var node1 = {
-       "ModelTitle": copy
-       } 
-    return node1;
-    return copy;
+    models = models.map(function(m){
+        return {
+            Id: m.id,
+            model: m
+        }
+    });
+    return {
+        SkuidModels: models
+    };
 }
 
 chrome.devtools.panels.elements.createSidebarPane(
-        "Skuid  Properties",
+        "Skuid Model properties",
         function(sidebar) {
             function updateElementProperties() {
                 var pageProp = page_getProperties.toString();
                 console.log(pageProp);
-
-                //var m = page_getProperties();
-                //alert(m)
                 sidebar.setExpression("(" + page_getProperties.toString() + ")()", "title", function(){
                     console.log("set Expression triggered"); 
                 });
@@ -42,3 +32,10 @@ chrome.devtools.panels.elements.createSidebarPane(
             chrome.devtools.panels.elements.onSelectionChanged.addListener(
                     updateElementProperties);
         });
+
+   chrome.devtools.panels.create("skuid-dev-tools",
+   "",
+   "Panel.html"
+   function(panel) {
+      panel.setPage("Panel.html"); 
+       });
