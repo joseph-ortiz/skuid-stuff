@@ -32,10 +32,3 @@ chrome.devtools.panels.elements.createSidebarPane(
             chrome.devtools.panels.elements.onSelectionChanged.addListener(
                     updateElementProperties);
         });
-
-   chrome.devtools.panels.create("skuid-dev-tools",
-   "",
-   "Panel.html"
-   function(panel) {
-      panel.setPage("Panel.html"); 
-       });
